@@ -6,18 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SplashActivity extends AppCompatActivity {
     TextView tvSplash;
     Animation animation;
+    ImageView ivSplash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         tvSplash = findViewById(R.id.tvSplash);
-
+        ivSplash = findViewById(R.id.imageView3);
         animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.a1);
 
         new Thread(new Runnable() {
