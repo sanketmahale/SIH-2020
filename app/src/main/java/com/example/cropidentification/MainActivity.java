@@ -12,11 +12,14 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnCamera;
     TextView tvAppName;
+    Button btnGoogleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnCamera = findViewById(R.id.btnCamera);
+        btnGoogleMap=findViewById(R.id.btnGoogleMap);
+
         tvAppName = findViewById(R.id.tvAppName);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
@@ -24,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent a = new Intent(MainActivity.this, PhotoActivity.class);
                 startActivity(a);
+            }
+        });
+
+        btnGoogleMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent g=new Intent(MainActivity.this,MapsActivity.class);
+                startActivity(g);
             }
         });
     }
