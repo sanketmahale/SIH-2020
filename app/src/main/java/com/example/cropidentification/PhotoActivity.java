@@ -36,4 +36,11 @@ public class PhotoActivity extends AppCompatActivity {
         });
 
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==111 && resultCode==RESULT_OK){
+            bitmap = (Bitmap)data.getExtras().get("data");
+            imageView.setImageBitmap(bitmap);
+        }
+    }
 }
