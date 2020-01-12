@@ -8,15 +8,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginStart="55dp"
         android:layout_marginLeft="55dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
-        android:layout_marginBottom="168dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_marginBottom="124dp"
+        app:layout_constraintBottom_toTopOf="@+id/btntrain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,22 +26,21 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="161dp"
+        android:layout_marginBottom="171dp"
         android:text="Capture"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/btntrain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginLeft="11dp"
-        android:layout_marginBottom="93dp"
-        android:text="TextView"
+        android:layout_marginBottom="86dp"
+        android:text="Identify"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />

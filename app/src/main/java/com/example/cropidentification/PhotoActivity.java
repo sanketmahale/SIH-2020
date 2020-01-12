@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class PhotoActivity extends AppCompatActivity {
 
-    Button button2;
+    Button button2,btntrain;
     ImageView imageView;
     TextView  textView;
     Bitmap bitmap;
@@ -25,7 +25,7 @@ public class PhotoActivity extends AppCompatActivity {
 
         button2 = findViewById(R.id.button2);
         imageView = findViewById(R.id.imageView);
-        textView = findViewById(R.id.textView);
+        btntrain = findViewById(R.id.btntrain);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,12 +35,20 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
 
+        btntrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(PhotoActivity.this, ResultActivity.class);
+                startActivity(a);
+            }
+        });
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==111 && resultCode==RESULT_OK){
             bitmap = (Bitmap)data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            button2.setEnabled(false);
         }
     }
 }
