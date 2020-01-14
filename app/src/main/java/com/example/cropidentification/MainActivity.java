@@ -12,13 +12,13 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnCamera;
     TextView tvAppName;
-
+    Button btnGoogleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnCamera = findViewById(R.id.btnCamera);
-
+        btnGoogleMap=findViewById(R.id.btnGoogleMap);
 
         tvAppName = findViewById(R.id.tvAppName);
 
@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        btnGoogleMap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent g=new Intent(MainActivity.this,MapsActivity.class);
+//                startActivity(g);
+//            }
+//        });
     }
 }
 
