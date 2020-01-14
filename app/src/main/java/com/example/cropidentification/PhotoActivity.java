@@ -1,7 +1,11 @@
 package com.example.cropidentification;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -17,9 +21,16 @@ import com.wonderkiln.camerakit.CameraKitImage;
 import com.wonderkiln.camerakit.CameraKitVideo;
 import com.wonderkiln.camerakit.CameraView;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 
 public class PhotoActivity extends AppCompatActivity {
     private static final String MODEL_PATH = "model_unquant.tflite";
@@ -30,10 +41,14 @@ public class PhotoActivity extends AppCompatActivity {
     private Classifier classifier;
 
     private Executor executor = Executors.newSingleThreadExecutor();
-    private TextView textViewResult;
+    private TextView textViewResult, tvLocation;
     private Button btnDetectObject, btnToggleCamera;
     private ImageView imageViewResult;
     private CameraView cameraView;
+    double lat;
+    double lon;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    LocationRequest locationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,42 @@ public class PhotoActivity extends AppCompatActivity {
         textViewResult.setMovementMethod(new ScrollingMovementMethod());
         btnToggleCamera = findViewById(R.id.btnToggleCamera);
         btnDetectObject = findViewById(R.id.btnDetectObject);
+        //tvLocation = findViewById(R.id.tvLocation);
+
+        fusedLocationProviderClient = new FusedLocationProviderClient(this);
+        locationRequest = new LocationRequest();
+
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(4000);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 123);
+            //tvLocation.setText("Location not found :(\nGive location permission in Settings");
+        }
+        else {
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    try {
+                        lat = locationResult.getLastLocation().getLatitude();
+                        lon = locationResult.getLastLocation().getLongitude();
+                        //tvLocation.setText("Latitude: " + lat + "\nLongitude: " + lon);
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, getMainLooper());
+        }
 
         cameraView.addCameraKitListener(new CameraKitEventListener() {
             @Override
@@ -69,7 +120,21 @@ public class PhotoActivity extends AppCompatActivity {
 
                 final List<Classifier.Recognition> results = classifier.recognizeImage(bitmap);
 
-                textViewResult.setText(results.toString());
+                Intent a = new Intent(PhotoActivity.this, ResultActivity.class);
+
+                Bundle extras = new Bundle();
+
+                extras.putString("crop", results.toString());
+
+                extras.putDouble("lon", lon);
+                extras.putDouble("lat", lat);
+                ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, bs);
+                extras.putByteArray("image", bs.toByteArray());
+                a.putExtras(extras);
+                startActivity(a);
+                textViewResult.setText
+                        (results.toString());
 
             }
 

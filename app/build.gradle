@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.example.cropidentification"
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.wonderkiln:camerakit:0.13.1'
     implementation 'org.tensorflow:tensorflow-lite:+'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.0'
 }

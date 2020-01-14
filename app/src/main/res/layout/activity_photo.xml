@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_photo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PhotoActivity">
 
     <com.wonderkiln.camerakit.CameraView
@@ -14,11 +15,13 @@
 
 
     <LinearLayout
+        android:id="@+id/secondLayout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="center|top"
         android:layout_marginTop="300dp"
         android:gravity="center"
+        android:weightSum="2"
         android:orientation="horizontal">
 
         <ImageView
@@ -41,16 +44,6 @@
 
 
     <Button
-        android:id="@+id/btnToggleCamera"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="50dp"
-        android:text="Toggle Camera"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black" />
-
-    <Button
         android:id="@+id/btnDetectObject"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -60,7 +53,19 @@
         android:textColor="@android:color/black"
         android:visibility="gone" />
 
-</FrameLayout>
+
+    <Button
+        android:id="@+id/btnToggleCamera"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="50dp"
+        android:text="Toggle Camera"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black" />
+
+
+</LinearLayout>
 
 
 
