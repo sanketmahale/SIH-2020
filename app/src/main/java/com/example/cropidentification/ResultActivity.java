@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,7 +74,6 @@ public class ResultActivity extends AppCompatActivity {
                 a.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
                 a.setType("image/*");
                 startActivity(a);
-
             }
         });
     }
