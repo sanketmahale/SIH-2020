@@ -1,0 +1,10 @@
+0 Cabbage
+1 Banana
+2 Chilly
+3 Corn
+4 Cotton
+5 Cucumbar
+6 Mustard
+7 Onion
+8 Rice
+9 Sugarcane
